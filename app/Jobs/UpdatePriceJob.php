@@ -48,8 +48,8 @@ class UpdatePriceJob implements ShouldQueue
 
         $data = json_decode($response, true);
 
-        $lastPrice = Price::orderby('created_at', 'desc')->latest()->first();
-        if($lastPrice->price != $data['price']) {
+        $lastPrice = Price::where('token', $this->token)->orderby('created_at', 'desc')->latest()->first();
+        if(strcmp($lastPrice->price, $data['price']) !== 0) {
             Price::create([
                 'token' => $this->token,
                 'price' => $data['price'],

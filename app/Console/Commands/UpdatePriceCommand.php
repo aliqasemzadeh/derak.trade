@@ -46,10 +46,17 @@ class UpdatePriceCommand extends Command
         curl_close($curl);
 
         $data = json_decode($response, true);
-        Price::create([
-            'token' => $token,
-            'price' => $data['price'],
-            'change' => $data['24h_change'],
-        ]);
+        $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
+        echo $lastPrice->price . "\n";
+        echo $data['price'] . "\n";
+        echo strcmp($lastPrice->price, $data['price']) . "\n";
+        if(strcmp($lastPrice->price, $data['price']) !== 0) {
+            Price::create([
+                'token' => $token,
+                'price' => $data['price'],
+                'change' => $data['24h_change'],
+            ]);
+            echo "Insert!\n";
+        }
     }
 }
