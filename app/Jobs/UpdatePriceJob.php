@@ -31,7 +31,7 @@ class UpdatePriceJob implements ShouldQueue
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.osmosis.zone/tokens/v2/price/' + $this->token,
+            CURLOPT_URL => 'https://api.osmosis.zone/tokens/v2/price/' . $this->token,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
