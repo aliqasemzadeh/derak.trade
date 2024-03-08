@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\UpdatePriceJob;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class UpdateTokens extends Command
 {
@@ -28,6 +29,8 @@ class UpdateTokens extends Command
     {
         $tokens = config('tokens.active');
         foreach ($tokens as $token) {
+            Log::info($token);
+            echo($token);
             UpdatePriceJob::dispatch($token);
         }
     }
