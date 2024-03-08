@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Derak Trade Software Assistance - @yield('title')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @yield('js')
+
 </head>
 <body>
     <div class="container mx-auto px-4">
         @yield('content')
     </div>
+    @yield('js')
 </body>
 </html>
