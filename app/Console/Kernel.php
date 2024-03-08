@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call(new UpdateTokensJob())->everyMinute();
+        $schedule->call("derak:update-tokens")->everyMinute();
     }
 
     /**

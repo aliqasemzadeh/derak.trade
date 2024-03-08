@@ -25,9 +25,6 @@ class UpdateTokensJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $tokens = config('tokens.active');
-        foreach ($tokens as $token) {
-            UpdatePriceJob::dispatch($token);
-        }
+
     }
 }
