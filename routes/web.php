@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::get('/token/{token}', [\App\Http\Controllers\HomeController::class, 'token'])->name('home.token');
+Route::get('/token-data-chart/{token}', [\App\Http\Controllers\HomeController::class, 'tokenChartData'])->name('home.token-data-chart');
