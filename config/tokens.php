@@ -4,6 +4,7 @@ return [
       'WBTC',
       'WETH',
       'ATOM',
+      //'INJ',
       'OSMO',
       'FET',
       'STRD',
@@ -11,5 +12,8 @@ return [
       'ION',
       'MNTL',
       'JKL',
+      //'KUJI',
+      //'AKT',
+      //'BTSG',
   ]
 ];

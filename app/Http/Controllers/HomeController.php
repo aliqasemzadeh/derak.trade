@@ -21,13 +21,26 @@ class HomeController extends Controller
 
     public function token($token): View
     {
-        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(30)->latest()->get();
-        return view('home.token', compact( 'prices', 'token'));
+        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
+        $data = [];
+        foreach ($prices as $price) {
+            $data['prices'][] = $price->price;
+            $data['times'][] = $price->created_at;
+        }
+
+        $wbtcPrices = Price::where('token', 'WBTC')->orderby('created_at', 'desc')->limit(150)->latest()->get();
+        $wbtcData = [];
+        foreach ($wbtcPrices as $price) {
+            $wbtcData['prices'][] = $price->price;
+            $wbtcData['times'][] = $price->created_at;
+        }
+
+        return view('home.token', compact( 'prices', 'token', 'data', 'wbtcData'));
     }
 
     public function tokenChartData($token)
     {
-        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(30)->latest()->get();
+        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
         $data = [];
         foreach ($prices as $price) {
             $data['prices'][] = $price->price;
