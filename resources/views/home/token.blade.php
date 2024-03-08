@@ -10,15 +10,20 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
+                    labels: response.data.labels,
                     datasets: [
                         {
                             label: "Prices",
-                            data: response.data,
+                            data: response.data.prices,
                             borderColor: '#0936ca',
                             backgroundColor: '#041631',
                             fill: false
                         },
                     ]
+                },
+                options: {
+                    scales: {
+                    }
                 }
             });
         }).catch(function (error) {

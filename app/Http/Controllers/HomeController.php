@@ -30,7 +30,8 @@ class HomeController extends Controller
         $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(30)->latest()->get();
         $data = [];
         foreach ($prices as $price) {
-            $data[] = $price->price;
+            $data['prices'][] = $price->price;
+            $data['times'][] = $price->created_at;
         }
         return response()->json($data);
     }
