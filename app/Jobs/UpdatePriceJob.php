@@ -45,6 +45,8 @@ class UpdatePriceJob implements ShouldQueue
 
         $response = curl_exec($curl);
 
+        Log::info(serialize($response));
+
         curl_close($curl);
         $data = json_decode($response, true);
 
