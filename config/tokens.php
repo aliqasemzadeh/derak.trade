@@ -2,14 +2,14 @@
 return [
   'active' => [
       'WBTC',
+      'WETH',
       'ATOM',
       'OSMO',
       'FET',
       'STRD',
-      'WETH',
       'KAVA',
       'ION',
       'MNTL',
-      'PLQ',
+      'JKL',
   ]
 ];

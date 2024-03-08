@@ -1,38 +1,37 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Console\Commands;
 
 use App\Models\Price;
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class UpdatePriceJob implements ShouldQueue
+class UpdatePriceCommand extends Command
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
-    public $token;
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'derak:update-price {token}';
 
     /**
-     * Create a new job instance.
+     * The console command description.
+     *
+     * @var string
      */
-    public function __construct($token)
-    {
-        $this->token = $token;
-    }
+    protected $description = 'Command description';
 
     /**
-     * Execute the job.
+     * Execute the console command.
      */
-    public function handle(): void
+    public function handle()
     {
+        $token = $this->argument('token');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://176.9.35.126/~getformi/?token=' . $this->token,
+            CURLOPT_URL => 'http://176.9.35.126/~getformi/?token=' . $token,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -47,12 +46,10 @@ class UpdatePriceJob implements ShouldQueue
         curl_close($curl);
 
         $data = json_decode($response, true);
-
         Price::create([
-            'token' => $this->token,
+            'token' => $token,
             'price' => $data['price'],
             'change' => $data['24h_change'],
         ]);
-
     }
 }
