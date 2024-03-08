@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
+    public $fillable = ['token', 'price', 'change'];
 }
