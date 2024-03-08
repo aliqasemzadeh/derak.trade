@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UpdatePriceJob implements ShouldQueue
 {
@@ -28,6 +29,7 @@ class UpdatePriceJob implements ShouldQueue
      */
     public function handle(): void
     {
+        Log::info($this->token);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -45,6 +47,7 @@ class UpdatePriceJob implements ShouldQueue
 
         curl_close($curl);
         $data = json_decode($response, true);
+
         Price::create([
            'token' => $this->token,
            'price' => $data['price'],
