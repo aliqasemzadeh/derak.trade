@@ -29,7 +29,6 @@ class UpdatePriceJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info($this->token);
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -45,16 +44,15 @@ class UpdatePriceJob implements ShouldQueue
 
         $response = curl_exec($curl);
 
-        Log::info(serialize($response));
-
         curl_close($curl);
-        $data = json_decode($response, true);
 
-        Price::create([
-           'token' => $this->token,
-           'price' => $data['price'],
-           'change' => $data['change'],
-        ]);
+//        $data = json_decode($response, true);
+//
+//        Price::create([
+//           'token' => $this->token,
+//           'price' => $data['price'],
+//           'change' => $data['change'],
+//        ]);
 
     }
 }
