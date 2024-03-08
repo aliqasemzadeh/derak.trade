@@ -57,6 +57,55 @@ class UpdatePriceCommand extends Command
                 'change' => $data['24h_change'],
             ]);
             echo "Insert!\n";
+
+            $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
+            $oldData = [];
+            foreach ($prices as $price) {
+                $oldData['prices'][] = $price->price;
+                $oldData['times'][] = $price->created_at;
+            }
+            $max = max($oldData['prices']);
+            $min = min($oldData['prices']);
+
+            if(strcmp($lastPrice->price, $max)  === 1) {
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت بالا" ."\n". $token ."\n".$data['price']."\n"."لغو11"),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+            }
+
+            if(strcmp($lastPrice->price, $min) === -1) {
+                $curl = curl_init();
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_ENCODING => '',
+                    CURLOPT_MAXREDIRS => 10,
+                    CURLOPT_TIMEOUT => 0,
+                    CURLOPT_FOLLOWLOCATION => true,
+                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                    CURLOPT_CUSTOMREQUEST => 'POST',
+                    CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت پایین"."\n" . $token ."\n".$data['price']."\n"."لغو11"),
+                ));
+
+                $response = curl_exec($curl);
+
+                curl_close($curl);
+            }
         }
     }
 }
