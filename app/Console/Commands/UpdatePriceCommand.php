@@ -47,15 +47,17 @@ class UpdatePriceCommand extends Command
 
         $data = json_decode($response, true);
         $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
+        $data['price'] = "4.0001";
         echo $lastPrice->price . "\n";
         echo $data['price'] . "\n";
         echo strcmp($lastPrice->price, $data['price']) . "\n";
+
         if(strcmp($lastPrice->price, $data['price']) !== 0) {
-            Price::create([
+            /*Price::create([
                 'token' => $token,
                 'price' => $data['price'],
                 'change' => $data['24h_change'],
-            ]);
+            ]);*/
             echo "Insert!\n";
 
             $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
@@ -67,7 +69,8 @@ class UpdatePriceCommand extends Command
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if(strcmp($lastPrice->price, $max)  === 1) {
+            if(bccomp($data['price'], $max, 5)  === 1) {
+                echo "New Max\n";
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -87,7 +90,8 @@ class UpdatePriceCommand extends Command
                 curl_close($curl);
             }
 
-            if(strcmp($lastPrice->price, $min) === -1) {
+            if(bccomp($data['price'], $min, 5) === -1) {
+                echo "New Min\n";
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(

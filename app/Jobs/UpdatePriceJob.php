@@ -65,7 +65,7 @@ class UpdatePriceJob implements ShouldQueue
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if(strcmp($lastPrice->price, $max)  === 1) {
+            if(bccomp($data['price'], $max, 5)  === 1) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -85,7 +85,7 @@ class UpdatePriceJob implements ShouldQueue
                 curl_close($curl);
             }
 
-            if(strcmp($lastPrice->price, $min) === -1) {
+            if(bccomp($data['price'], $min, 5) === -1) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
