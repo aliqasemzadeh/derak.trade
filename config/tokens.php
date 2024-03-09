@@ -34,8 +34,6 @@ return [
       'LIKE',
       'NETA',
       'LUNA',
-      'MEME',
-      'ACRE',
       'VDL',
       'stOSMO',
       'stATOM',
