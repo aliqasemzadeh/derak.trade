@@ -35,7 +35,6 @@ return [
       'NETA',
       'LUNA',
       'VDL',
-      'SOURCE',
       'stOSMO',
       'stATOM',
   ]
