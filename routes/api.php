@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/v1/', [\App\Http\Controllers\API\V1\MainController::class, 'index'])->name('api.index');
+Route::get('/v1/token/{token}', [\App\Http\Controllers\API\V1\MainController::class, 'token'])->name('api.token');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
