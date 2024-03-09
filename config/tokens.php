@@ -38,7 +38,5 @@ return [
       'VDL',
       'stOSMO',
       'stATOM',
-      'stATOM',
-
   ]
 ];
