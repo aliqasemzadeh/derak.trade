@@ -14,6 +14,7 @@ return [
       'HUAHUA',
       'MNTL',
       'JKL',
+      'STARS',
       'KUJI',
       'AKT',
       'BTSG',
