@@ -35,6 +35,10 @@ return [
       'LUNA',
       'MEME',
       'ACRE',
+      'VDL',
+      'stOSMO',
+      'stATOM',
+      'stATOM',
 
   ]
 ];
