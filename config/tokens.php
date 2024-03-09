@@ -12,8 +12,8 @@ return [
       'ION',
       'MNTL',
       'JKL',
-      //'KUJI',
-      //'AKT',
-      //'BTSG',
+      'KUJI',
+      'AKT',
+      'BTSG',
   ]
 ];

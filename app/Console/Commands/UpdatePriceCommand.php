@@ -47,7 +47,15 @@ class UpdatePriceCommand extends Command
 
         $data = json_decode($response, true);
         $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
-        $data['price'] = "4.0001";
+        if(!$lastPrice) {
+            Price::create([
+                'token' => $token,
+                'price' => $data['price'],
+                'change' => $data['24h_change'],
+            ]);
+            $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
+        }
+        $data['price'] = "4.9001";
         echo $lastPrice->price . "\n";
         echo $data['price'] . "\n";
         echo strcmp($lastPrice->price, $data['price']) . "\n";
@@ -69,7 +77,13 @@ class UpdatePriceCommand extends Command
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if(bccomp($data['price'], $max, 5)  === 1) {
+            echo "P:", gmp_init($data['price'] * 10**18) ."\n";
+            echo "Max:", gmp_init($max * 10**18);
+            echo "\n";
+            echo "Min:", gmp_init($min * 10**18);
+            echo "\n";
+
+            if($data['price'] * 10**18 > $max * 10**18) {
                 echo "New Max\n";
                 $curl = curl_init();
 
@@ -90,7 +104,7 @@ class UpdatePriceCommand extends Command
                 curl_close($curl);
             }
 
-            if(bccomp($data['price'], $min, 5) === -1) {
+            if($data['price'] * 10**18 < $min * 10**18) {
                 echo "New Min\n";
                 $curl = curl_init();
 

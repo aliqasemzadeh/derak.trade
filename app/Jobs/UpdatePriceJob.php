@@ -49,6 +49,14 @@ class UpdatePriceJob implements ShouldQueue
         $data = json_decode($response, true);
 
         $lastPrice = Price::where('token', $this->token)->orderby('created_at', 'desc')->latest()->first();
+        if(!$lastPrice) {
+            Price::create([
+                'token' => $this->token,
+                'price' => $data['price'],
+                'change' => $data['24h_change'],
+            ]);
+            $lastPrice = Price::where('token', $this->token)->orderby('created_at', 'desc')->latest()->first();
+        }
         if(strcmp($lastPrice->price, $data['price']) !== 0) {
             Price::create([
                 'token' => $this->token,
@@ -65,7 +73,7 @@ class UpdatePriceJob implements ShouldQueue
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if(bccomp($data['price'], $max, 5)  === 1) {
+            if($data['price'] * 10**18 > $max * 10**18) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(
@@ -85,7 +93,7 @@ class UpdatePriceJob implements ShouldQueue
                 curl_close($curl);
             }
 
-            if(bccomp($data['price'], $min, 5) === -1) {
+            if($data['price'] * 10**18 < $min * 10**18) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, array(

@@ -8,6 +8,7 @@
             responsive: true,
             scales: {
                 yAxes:[{
+                    display:false,
                     stacked:true,
                     gridLines: {
                         display:true,
@@ -53,9 +54,24 @@
     <div>
         <canvas id="tokenDataChart"></canvas>
     </div>
+    <div class="overflow-x-auto rounded-lg border border-gray-200">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <tbody class="divide-y divide-gray-200">
+        <thead class="ltr:text-left rtl:text-right">
+        <tr>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ __('Price') }}</th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ __('Time') }}</th>
+        </tr>
+        </thead>
 
-    @foreach($prices as $price)
-        ${{ $price->price }} ({{ $price->created_at }})
-        <br />
-    @endforeach
+        @foreach($prices as $price)
+            <tr>
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">${{ $price->price }}</td>
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $price->created_at }}</td>
+
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    </div>
 @endsection
