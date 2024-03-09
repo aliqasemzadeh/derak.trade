@@ -25,7 +25,7 @@ class HomeController extends Controller
         $data = [];
         foreach ($prices as $price) {
             $data['prices'][] = $price->price;
-            $data['times'][] = $price->created_at;
+            $data['times'][] = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $price->created_at)->format('H:i:s');
         }
 
         $wbtcPrices = Price::where('token', 'WBTC')->orderby('created_at', 'desc')->limit(150)->latest()->get();

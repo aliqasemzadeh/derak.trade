@@ -73,44 +73,46 @@ class UpdatePriceJob implements ShouldQueue
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if($data['price'] * 10**18 > $max * 10**18) {
-                $curl = curl_init();
+            if(count($oldData['prices']) > 50) {
+                if($data['price'] * 10**18 > $max * 10**18) {
+                    $curl = curl_init();
 
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت بالا" ."\n". $this->token ."\n".$data['price']."\n"."لغو11"),
-                ));
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت بالا" ."\n". $this->token ."\n".$data['price']."\n"."لغو11"),
+                    ));
 
-                $response = curl_exec($curl);
+                    $response = curl_exec($curl);
 
-                curl_close($curl);
-            }
+                    curl_close($curl);
+                }
 
-            if($data['price'] * 10**18 < $min * 10**18) {
-                $curl = curl_init();
+                if($data['price'] * 10**18 < $min * 10**18) {
+                    $curl = curl_init();
 
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => '',
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 0,
-                    CURLOPT_FOLLOWLOCATION => true,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => 'POST',
-                    CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت پایین"."\n" . $this->token ."\n".$data['price']."\n"."لغو11"),
-                ));
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => 'https://api.sabanovin.com/v1/'.env('APP_SMS_API').'/sms/send.json',
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => '',
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => true,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => 'POST',
+                        CURLOPT_POSTFIELDS => array('gateway' => env('APP_SMS_GATEWAY'),'to' => env('APP_TEST_MOBILE'),'text' => "قیمت پایین"."\n" . $this->token ."\n".$data['price']."\n"."لغو11"),
+                    ));
 
-                $response = curl_exec($curl);
+                    $response = curl_exec($curl);
 
-                curl_close($curl);
+                    curl_close($curl);
+                }
             }
 
         }

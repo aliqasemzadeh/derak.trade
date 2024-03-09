@@ -35,8 +35,8 @@
                         {
                             label: "{{ $token }}",
                             data:  chartData,
-                            borderColor: '#0936ca',
-                            backgroundColor: '#0936ca',
+                            borderColor: '#d20c0c',
+                            backgroundColor: '#d20c0c',
                             fill: false
                         }
                     ]
@@ -48,8 +48,8 @@
 
 @section('content')
     <div class="flex flex-row">
-        <div class="basis-1/2 text-center text-red-900 ring-2 ring-red-500 rounded-lg p-2 m-2 hover:drop-shadow-md">Min:${{ min($data['prices']) }}</div>
-        <div class="basis-1/2 text-center text-green-900 ring-2 ring-green-500 rounded-lg p-2 m-2 hover:drop-shadow-md">Max:${{ max($data['prices']) }}</div>
+        <div class="basis-1/2 text-center bg-white dark:bg-red-200 text-red-900 ring-2 ring-red-500 rounded-lg p-2 m-2 hover:drop-shadow-md">Min:${{ sprintf("%0.3f", min($data['prices'])) }}</div>
+        <div class="basis-1/2 text-center bg-white dark:bg-green-200 text-green-900 ring-2 ring-green-500 rounded-lg p-2 m-2 hover:drop-shadow-md">Max:${{ sprintf("%0.3f", max( $data['prices'])) }}</div>
     </div>
     <div>
         <canvas id="tokenDataChart"></canvas>
