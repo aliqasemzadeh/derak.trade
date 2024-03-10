@@ -14,7 +14,9 @@
 
                 @foreach($priceTokens as $token => $price)
                     <tr>
-                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $token }}</td>
+                        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                            <img width="16px" height="16px" src="https://app.osmosis.zone/tokens/generated/{{ strtolower($token) }}.svg" />
+                            {{ $token }}</td>
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">${{ $price }}</td>
                         <td class="whitespace-nowrap px-4 py-2">
                             <a href="{{ route('home.token', [$token]) }}" class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700">
