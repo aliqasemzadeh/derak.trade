@@ -15,6 +15,7 @@ class MainController extends Controller
         $priceTokens = [];
         foreach ($activeTokens as $token) {
             $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
+            $priceTokens[$token]['symbol'] = $token;
             $priceTokens[$token]['price'] = $lastPrice->price;
             $priceTokens[$token]['icon'] = "https://app.osmosis.zone/tokens/generated/". strtolower($token) .".svg";
         }
