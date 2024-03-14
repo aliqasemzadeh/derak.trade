@@ -21,14 +21,14 @@ class HomeController extends Controller
 
     public function token($token): View
     {
-        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
+        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(250)->latest()->get();
         $data = [];
         foreach ($prices as $price) {
             $data['prices'][] = $price->price;
             $data['times'][] = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $price->created_at)->format('H:i:s');
         }
 
-        $wbtcPrices = Price::where('token', 'WBTC')->orderby('created_at', 'desc')->limit(150)->latest()->get();
+        $wbtcPrices = Price::where('token', 'WBTC')->orderby('created_at', 'desc')->limit(250)->latest()->get();
         $wbtcData = [];
         foreach ($wbtcPrices as $price) {
             $wbtcData['prices'][] = $price->price;
@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function tokenChartData($token)
     {
-        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
+        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(250)->latest()->get();
         $data = [];
         foreach ($prices as $price) {
             $data['prices'][] = $price->price;
