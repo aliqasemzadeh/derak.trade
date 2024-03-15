@@ -42,6 +42,7 @@ return [
         'OSMO',
         'WBTC',
         'ATOM',
+        'FET',
         'ION',
     ]
 ];
