@@ -37,5 +37,10 @@ return [
       'VDL',
       'stOSMO',
       'stATOM',
-  ]
+  ],
+    'sms' => [
+        'OSMO',
+        'ATOM',
+        'ION',
+    ]
 ];
