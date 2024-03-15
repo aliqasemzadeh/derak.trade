@@ -40,6 +40,7 @@ return [
   ],
     'sms' => [
         'OSMO',
+        'WBTC',
         'ATOM',
         'ION',
     ]
