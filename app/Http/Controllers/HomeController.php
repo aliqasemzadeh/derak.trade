@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     public function token($token): View
     {
-        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(250)->latest()->get();
+        $prices = Price::where('token', $token)->orderby('created_at', 'desc')->limit(config('tokens.range'))->latest()->get();
         $data = [];
         foreach ($prices as $price) {
             $data['prices'][] = $price->price;
