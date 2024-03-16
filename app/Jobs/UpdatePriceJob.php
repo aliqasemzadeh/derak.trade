@@ -65,7 +65,7 @@ class UpdatePriceJob implements ShouldQueue
                 'change' => $data['24h_change'],
             ]);
 
-            $prices = Price::where('token', $this->token)->orderby('created_at', 'desc')->limit(150)->latest()->get();
+            $prices = Price::where('token', $this->token)->orderby('created_at', 'desc')->limit(config('tokens.range'))->latest()->get();
             $oldData = [];
             foreach ($prices as $price) {
                 $oldData['prices'][] = $price->price;
