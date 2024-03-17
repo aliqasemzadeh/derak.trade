@@ -46,6 +46,10 @@
     </script>
 @endsection
 
+@section('title')
+    {{ $prices->first()->price }}
+@endsection
+
 @section('content')
     <div class="flex flex-row">
         <div class="basis-1/2 text-center bg-white dark:bg-red-200 text-red-900 ring-2 ring-red-500 rounded-lg p-2 m-2 hover:drop-shadow-md">Min:${{ sprintf("%0.3f", min($data['prices'])) }}</div>
@@ -68,10 +72,10 @@
             <tr>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">${{ $price->price }}</td>
                 <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ $price->created_at }}</td>
-
             </tr>
         @endforeach
         </tbody>
     </table>
     </div>
 @endsection
+

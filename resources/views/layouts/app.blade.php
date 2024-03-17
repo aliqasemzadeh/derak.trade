@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Derak Trade Software Assistance - @yield('title')</title>
+    <title>@yield('title')  Derak Trade Software Assistance</title>
+    <meta http-equiv="refresh" content="300">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('css')
 </head>
