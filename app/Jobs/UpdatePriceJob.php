@@ -74,7 +74,7 @@ class UpdatePriceJob implements ShouldQueue
             $max = max($oldData['prices']);
             $min = min($oldData['prices']);
 
-            if(count($oldData['prices']) > 50) {
+            if(count($oldData['prices']) >= 50) {
                 if(in_array( $this->token, config('tokens.sms'))) {
                     if($data['price'] * 10**18 > $max * 10**18) {
                         $curl = curl_init();

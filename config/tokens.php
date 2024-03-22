@@ -45,5 +45,5 @@ return [
         'FET',
         'ION',
     ],
-    'range' => 50
+    'range' => 100
 ];
