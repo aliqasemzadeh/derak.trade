@@ -44,6 +44,7 @@ return [
         'ATOM',
         'FET',
         'ION',
+        'STRD',
     ],
     'range' => 100
 ];
