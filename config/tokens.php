@@ -45,6 +45,7 @@ return [
         'FET',
         'ION',
         'STRD',
+        'MNTL',
     ],
     'range' => 100
 ];
