@@ -15,6 +15,7 @@ return [
       'KAVA',
       'JKL',
       'STARS',
+      'SCRT',
       'KUJI',
       'AKT',
       'BTSG',
@@ -47,6 +48,7 @@ return [
         'STRD',
         'MNTL',
         'KAVA',
+        'SCRT',
     ],
     'range' => 100
 ];
