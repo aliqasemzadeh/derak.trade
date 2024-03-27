@@ -49,6 +49,7 @@ return [
         'MNTL',
         'KAVA',
         'SCRT',
+        'AXL',
     ],
     'range' => 100
 ];
