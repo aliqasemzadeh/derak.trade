@@ -38,6 +38,13 @@
                             borderColor: '#d20c0c',
                             backgroundColor: '#d20c0c',
                             fill: false
+                        },
+                        {
+                            label: "WBTC",
+                            data:  wbtcChartData,
+                            borderColor: '#1b943e',
+                            backgroundColor: '#1b943e',
+                            fill: false
                         }
                     ]
                 },
@@ -47,7 +54,7 @@
 @endsection
 
 @section('title')
-    {{ $prices->first()->price }}
+    {{ round($prices->first()->price, 4, PHP_ROUND_HALF_DOWN) }}
 @endsection
 
 @section('content')

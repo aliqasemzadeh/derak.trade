@@ -36,6 +36,14 @@ class HomeController extends Controller
             $wbtcData['times'][] = $price->created_at;
         }
 
+        $tokenMax =  max($data['prices']);
+
+        $wbtcMin =  min($wbtcData['prices']);
+        $wbtcMax =  min($wbtcData['prices']);
+        foreach ($wbtcData['prices'] as $key => $price) {
+            $wbtcData['prices'][$key] =  ($wbtcData['prices'][$key] * $tokenMax) / $wbtcMax;
+        }
+
         return view('home.token', compact( 'prices', 'token', 'data', 'wbtcData'));
     }
 
