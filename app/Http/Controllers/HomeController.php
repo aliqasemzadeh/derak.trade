@@ -14,7 +14,8 @@ class HomeController extends Controller
         $priceTokens = [];
         foreach ($activeTokens as $token) {
             $lastPrice = Price::where('token', $token)->orderby('created_at', 'desc')->latest()->first();
-            $priceTokens[$token] = $lastPrice->price;
+            $priceTokens[$token]['price'] = $lastPrice->price;
+            $priceTokens[$token]['change'] = $lastPrice->change;
         }
         return view('home.index', compact( 'priceTokens'));
     }
