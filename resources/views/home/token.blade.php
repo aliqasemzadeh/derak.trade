@@ -54,7 +54,7 @@
 @endsection
 
 @section('title')
-    {{ round($prices->first()->price, 4, PHP_ROUND_HALF_DOWN) }}
+    {{ round($prices->first()->price, 4, PHP_ROUND_HALF_DOWN) }} -
 @endsection
 
 @section('content')
