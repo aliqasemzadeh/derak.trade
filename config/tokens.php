@@ -51,5 +51,6 @@ return [
         'SCRT',
         'AXL',
     ],
-    'range' => 100
+    'range' => 100,
+    'refresh_time' => 180
 ];

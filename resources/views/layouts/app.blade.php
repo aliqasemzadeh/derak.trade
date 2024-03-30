@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title')  Derak Trade Software Assistance</title>
-    <meta http-equiv="refresh" content="180">
+    <meta http-equiv="refresh" content="{{ config('tokens.refresh_time') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('css')
 </head>
