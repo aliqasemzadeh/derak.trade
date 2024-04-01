@@ -41,6 +41,7 @@ return [
   ],
     'sms' => [
         'ION',
+        'KAVA',
     ],
     'range' => 100,
     'refresh_time' => 180
