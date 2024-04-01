@@ -14,7 +14,7 @@
                 </thead>
 
                 @foreach($priceTokens as $token => $data)
-                    <tr>
+                    <tr class="hover:bg-gray-100">
                         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                             <img width="16px" height="16px" src="https://app.osmosis.zone/tokens/generated/{{ strtolower($token) }}.svg" />
                             {{ $token }}</td>

@@ -40,16 +40,7 @@ return [
       'stATOM',
   ],
     'sms' => [
-        'OSMO',
-        'WBTC',
-        'ATOM',
-        'FET',
         'ION',
-        'STRD',
-        'MNTL',
-        'KAVA',
-        'SCRT',
-        'AXL',
     ],
     'range' => 100,
     'refresh_time' => 180
