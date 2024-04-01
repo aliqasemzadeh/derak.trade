@@ -42,6 +42,9 @@ return [
     'sms' => [
         'ION',
         'KAVA',
+        'FET',
+        'ATOM',
+        'OSMO',
     ],
     'range' => 100,
     'refresh_time' => 180
