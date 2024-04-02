@@ -45,6 +45,7 @@ return [
         'FET',
         'ATOM',
         'OSMO',
+        'WBTC',
     ],
     'range' => 100,
     'refresh_time' => 180
